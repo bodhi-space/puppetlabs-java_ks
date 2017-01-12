@@ -11,5 +11,5 @@ class java_ks::config(
 
   $truststore_keys  = deep_merge($java_ks::params::truststore_keys, $java_ks::truststore_keys)
 
-  class { 'java_ks::config::global::ssl': }
+  class { 'java_ks::config::ssl': }
 }
