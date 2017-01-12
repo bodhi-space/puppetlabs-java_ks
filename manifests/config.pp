@@ -1,15 +1,37 @@
-class java_ks::config(
-  $user                  = $java_ks::user,
-  $group                 = $java_ks::group,
-  $keystore              = $java_ks::keystore,
-  $keystore_password     = $java_ks::keystore_password,
-  $key_password          = $java_ks::key_password,
-  $truststore            = $java_ks::truststore,
-  $truststore_password   = $java_ks::truststore_password,
-  $service_name          = $java_ks::service_name,
-) inherits java_ks::params {
+# vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2 foldmethod=marker
+#
+# == Class: java_ks::config
+#
+# Configures java_ks
+#
+# Private class: Don't call directly
+#
+class java_ks::config inherits java_ks {
 
-  $truststore_keys  = deep_merge($java_ks::params::truststore_keys, $java_ks::truststore_keys)
+  define java_ks::config::ssl::truststore_file ($cert=$cert, $user=$user, $group=$group, $truststore=$truststore, $truststore_password=$truststore_password) {
+    file { "${truststore}-${title}.cert":
+      ensure  => present,
+      owner   => $user,
+      group   => $group,
+      mode    => '0640',
+      content => "$cert",
+    }
+    java_ks { "${title}:${truststore}":
+      ensure        => latest,
+      certificate   => "${truststore}-${title}.cert",
+      password      => $truststore_password,
+      trustcacerts  => true,
+    }
+  }
 
-  class { 'java_ks::config::ssl': }
+  $truststore_defaults = {
+    user                => $user,
+    group               => $group,
+    truststore          => $truststore,
+    truststore_password => $truststore_password,
+  }
+  
+  create_resources(java_ks::config::ssl::truststore_file, $truststore_keys, $truststore_defaults)
+
+
 }
