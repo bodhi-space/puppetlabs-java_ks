@@ -7,17 +7,17 @@
 # === Parameters
 # ---
 #
-class java_ks (
+class java_ks(
   
-  $keystore                     = getvar("java_ks::params::keystore"),
-  $keystore_password            = getvar("java_ks::params::keystore_password"),
-  $key_password                 = getvar("java_ks::params::key_password"),
-  $truststore                   = getvar("java_ks::params::truststore"),
-  $truststore_password          = getvar("java_ks::params::truststore_password"),
-  $truststore_keys              = getvar("java_ks::params::truststore_keys"),
-  $service_name                 = getvar("java_ks::params::service_name"),
-  $user                         = getvar("java_ks::params::user"),
-  $group                        = getvar("java_ks::params::group"),
+  $keystore            = getvar("::java_ks::params::keystore"),
+  $keystore_password   = getvar("::java_ks::params::keystore_password"),
+  $key_password        = getvar("::java_ks::params::key_password"),
+  $truststore          = getvar("::java_ks::params::truststore"),
+  $truststore_password = getvar("::java_ks::params::truststore_password"),
+  $truststore_keys     = getvar("::java_ks::params::truststore_keys"),
+  $service_name        = getvar("::java_ks::params::service_name"),
+  $user                = getvar("::java_ks::params::user"),
+  $group               = getvar("::java_ks::params::group"),
 
 ) inherits java_ks::params {
 
