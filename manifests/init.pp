@@ -11,7 +11,6 @@ class java_ks(
   
   $keystore            = getvar("::java_ks::params::keystore"),
   $keystore_password   = getvar("::java_ks::params::keystore_password"),
-  $key_password        = getvar("::java_ks::params::key_password"),
   $truststore          = getvar("::java_ks::params::truststore"),
   $truststore_password = getvar("::java_ks::params::truststore_password"),
   $truststore_keys     = getvar("::java_ks::params::truststore_keys"),
@@ -23,7 +22,6 @@ class java_ks(
 
   validate_absolute_path($keystore)
   validate_string($keystore_password)
-  validate_string($key_password)
   validate_absolute_path($truststore)
   validate_string($truststore_password)
   validate_hash($truststore_keys)

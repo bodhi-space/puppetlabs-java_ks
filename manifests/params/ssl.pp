@@ -5,7 +5,6 @@
 class java_ks::params::ssl {
   $keystore            = '/tmp/keystore' 
   $keystore_password   = ''
-  $key_password        = ''
   $truststore          = '/tmp/truststore'
   $truststore_password = ''
   $truststore_keys     = {} 
