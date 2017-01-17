@@ -8,7 +8,13 @@
 #
 class java_ks::config inherits java_ks {
 
-  define java_ks::config::ssl::truststore_file ($cert=$cert, $user=$user, $group=$group, $truststore=$truststore, $truststore_password=$truststore_password) {
+  define internalca(
+    $cert   = $cert,
+    $user   = $user,
+    $group  = $group,
+    $truststore = $truststore,
+    $truststore_password  = $truststore_password) {
+
     file { "${truststore}-${title}.cert":
       ensure  => present,
       owner   => $user,
@@ -23,15 +29,8 @@ class java_ks::config inherits java_ks {
       trustcacerts  => true,
     }
   }
-
-  $truststore_defaults = {
-    user                => $user,
-    group               => $group,
-    truststore          => $truststore,
-    truststore_password => $truststore_password,
-  }
   
-  create_resources(java_ks::config::ssl::truststore_file, $truststore_keys, $truststore_defaults)
+  create_resources(internalca, $truststore_keys, $truststore_defaults)
 
 
 }

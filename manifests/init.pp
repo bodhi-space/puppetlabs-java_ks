@@ -9,14 +9,16 @@
 #
 class java_ks(
   
-  $keystore            = getvar("::java_ks::params::keystore"),
-  $keystore_password   = getvar("::java_ks::params::keystore_password"),
-  $truststore          = getvar("::java_ks::params::truststore"),
-  $truststore_password = getvar("::java_ks::params::truststore_password"),
-  $truststore_keys     = getvar("::java_ks::params::truststore_keys"),
-  $service_name        = getvar("::java_ks::params::service_name"),
-  $user                = getvar("::java_ks::params::user"),
-  $group               = getvar("::java_ks::params::group"),
+  $keystore             = getvar("::java_ks::params::keystore"),
+  $keystore_password    = getvar("::java_ks::params::keystore_password"),
+  $truststore           = getvar("::java_ks::params::truststore"),
+  $truststore_password  = getvar("::java_ks::params::truststore_password"),
+  $truststore_keys      = getvar("::java_ks::params::truststore_keys"),
+  $service_name         = getvar("::java_ks::params::service_name"),
+  $user                 = getvar("::java_ks::params::user"),
+  $group                = getvar("::java_ks::params::group"),
+  $truststoreconf       = getvar("::java_ks::params::default_internalca")
+  $hieramerge           = false
 
 ) inherits java_ks::params {
 
@@ -28,8 +30,18 @@ class java_ks(
   validate_string($service_name)
   validate_string($user)
   validate_string($group)
+  validate_hash($truststore_defaults)
 
-  class { 'java_ks': } ~> Service[$service_name]
+  # Hiera hash merging support
+  if $hieramerge {
+    $x_truststoreconf = hiera_hash( 'java_ks::internalca'  , $truststoreconf  )
+  } else {
+    $x_truststoreconf    = $truststoreconf
+  }
+
+
+
+  class { 'java_ks::config': } ~> Service[$service_name]
 
   contain 'java_ks::config'
 }
