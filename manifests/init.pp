@@ -17,7 +17,7 @@ class java_ks(
   $service_name         = getvar("::java_ks::params::service_name"),
   $user                 = getvar("::java_ks::params::user"),
   $group                = getvar("::java_ks::params::group"),
-  $truststoreconf       = getvar("::java_ks::params::default_internalca")
+  $truststoreconf       = getvar("::java_ks::params::default_internalca"),
   $hieramerge           = false
 
 ) inherits java_ks::params {
