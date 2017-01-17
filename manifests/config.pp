@@ -29,8 +29,14 @@ class java_ks::config inherits java_ks {
       trustcacerts  => true,
     }
   }
+
+  $truststore_defaults = {
+    user                => $user,
+    group               => $group,
+    truststore          => $truststore,
+    truststore_password => $truststore_password,
+  }
   
-  #create_resources(internalca, $truststore_keys, $truststore_defaults)
-  create_resources(internalca, $x_trustoreconf, $configtruststoreconf)
+  create_resources(internalca, $truststoreconf, $truststore_defaults)
 
 }
