@@ -16,7 +16,7 @@ class java_ks(
   $service_name         = getvar("::java_ks::params::ssl::service_name"),
   $user                 = getvar("::java_ks::params::ssl::user"),
   $group                = getvar("::java_ks::params::ssl::group"),
-  $truststoreconf       = getvar("::java_ks::params::ssl::internalca"),
+  $truststoreconf       = getvar("::java_ks::params::ssl::config"),
 
 ) inherits java_ks::params {
 
