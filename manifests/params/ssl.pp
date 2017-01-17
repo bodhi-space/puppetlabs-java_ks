@@ -8,5 +8,4 @@ class java_ks::params::ssl {
   $config      = {} 
   $user                = '' 
   $group               = '' 
-  $service_name        = '' 
 }
