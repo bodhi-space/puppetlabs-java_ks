@@ -30,6 +30,7 @@ class java_ks::config inherits java_ks {
     }
   }
   
-  create_resources(internalca, $truststore_keys, $truststore_defaults)
+  #create_resources(internalca, $truststore_keys, $truststore_defaults)
+  create_resources(internalca, $x_trustoreconf, $configtruststoreconf)
 
 }

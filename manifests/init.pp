@@ -9,32 +9,32 @@
 #
 class java_ks(
   
-  $keystore             = getvar("::java_ks::params::keystore"),
-  $keystore_password    = getvar("::java_ks::params::keystore_password"),
-  $truststore           = getvar("::java_ks::params::truststore"),
-  $truststore_password  = getvar("::java_ks::params::truststore_password"),
-  $truststore_keys      = getvar("::java_ks::params::truststore_keys"),
-  $service_name         = getvar("::java_ks::params::service_name"),
-  $user                 = getvar("::java_ks::params::user"),
-  $group                = getvar("::java_ks::params::group"),
-  $truststoreconf       = getvar("::java_ks::params::default_internalca"),
-  $hieramerge           = false
+  $configkeystore             = getvar("::java_ks::params::ssl::configkeystore"),
+  $configkeystore_password    = getvar("::java_ks::params::ssl::configkeystore_password"),
+  $configtruststore           = getvar("::java_ks::params::ssl::configtruststore"),
+  $configtruststore_password  = getvar("::java_ks::params::ssl::configtruststore_password"),
+  $configtruststore_keys      = getvar("::java_ks::params::ssl::configtruststore_keys"),
+  $service_name               = getvar("::java_ks::params::ssl::configservice_name"),
+  $configuser                 = getvar("::java_ks::params::ssl::configuser"),
+  $configgroup                = getvar("::java_ks::params::ssl::configgroup"),
+  $configtruststoreconf       = getvar("::java_ks::params::ssl::default_internalca"),
+  $hieramerge                 = false
 
 ) inherits java_ks::params {
 
-  validate_absolute_path($keystore)
-  validate_string($keystore_password)
-  validate_absolute_path($truststore)
-  validate_string($truststore_password)
-  validate_hash($truststore_keys)
+  validate_absolute_path($configkeystore)
+  validate_string($configkeystore_password)
+  validate_absolute_path($configtruststore)
+  validate_string($configtruststore_password)
+  validate_hash($configtruststore_keys)
   validate_string($service_name)
-  validate_string($user)
-  validate_string($group)
+  validate_string($configuser)
+  validate_string($configgroup)
   validate_hash($truststore_defaults)
 
   # Hiera hash merging support
   if $hieramerge {
-    $x_truststoreconf = hiera_hash( 'java_ks::internalca'  , $truststoreconf  )
+    $x_truststoreconf = hiera_hash('java_ks::internalca', $truststoreconf)
   } else {
     $x_truststoreconf    = $truststoreconf
   }
