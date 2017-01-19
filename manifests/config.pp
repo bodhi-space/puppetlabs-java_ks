@@ -9,7 +9,7 @@
 class java_ks::config inherits java_ks {
 
   define internalca(
-    $certificate          = $cert,
+    $certificate          = $certificate,
     $user                 = $user,
     $group                = $group,
     $truststore           = $truststore,
