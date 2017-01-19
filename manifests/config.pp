@@ -17,7 +17,7 @@ class java_ks::config inherits java_ks {
 
     java_ks { "${title}:${truststore}":
       ensure        => latest,
-      certificate   => $certficate,
+      certificate   => $certificate,
       password      => $truststore_password,
       trustcacerts  => true,
     }
