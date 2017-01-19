@@ -31,6 +31,6 @@ class java_ks::config inherits java_ks {
     certificate         => $certificate,
   }
   
-  create_resources(truststore_file, $truststoreconf, $truststore_defaults)
+  create_resources(truststore_file, $truststore_keys, $truststore_defaults)
 
 }
