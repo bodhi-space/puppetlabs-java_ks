@@ -4,7 +4,7 @@
 #
 class java_ks::params::ssl {
   $certificate         = '/etc/openldap/cacerts/cacert.pem'
-  $config              = {} 
+  $truststore_keys     = {} 
   $group               = '' 
   $truststore          = '/tmp/truststore'
   $truststore_password = ''

@@ -14,7 +14,7 @@ class java_ks(
   $user                 = getvar("::java_ks::params::ssl::user"),
   $group                = getvar("::java_ks::params::ssl::group"),
   $certificate          = getvar("::java_ks::params::ssl::certificate"),
-  $truststoreconf       = hiera_hash("java_ks::config")
+  $truststore_keys      = hiera_hash("java_ks::truststore_keys")
 
 ) inherits java_ks::params {
 
@@ -23,7 +23,7 @@ class java_ks(
   validate_string($user)
   validate_string($group)
   validate_absolute_path($certificate)
-  validate_hash($truststoreconf)
+  validate_hash($truststore_keys)
 
   contain 'java_ks::config'
 }

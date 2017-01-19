@@ -8,7 +8,7 @@
 #
 class java_ks::config inherits java_ks {
 
-  define internalca(
+  define truststore_file(
     $certificate          = $certificate,
     $user                 = $user,
     $group                = $group,
@@ -31,6 +31,6 @@ class java_ks::config inherits java_ks {
     certificate         => $certificate,
   }
   
-  create_resources(internalca, $truststoreconf, $truststore_defaults)
+  create_resources(truststore_file, $truststoreconf, $truststore_defaults)
 
 }
